@@ -16,3 +16,7 @@ Route::get('/message/index', 'MessageController@index');
 Route::get('/', function () {
     return redirect('/message/index');
 });
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
