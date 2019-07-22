@@ -3,7 +3,9 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
-use Illuminate\Support\Facades\Mail; // Mailファサード
+use Illuminate\Support\Facades\Mail; // メールファサード
+use App\Message; // メッセージモデル
+use App\User; // ユーザモデル
 
 class sendMail extends Command
 {
@@ -38,9 +40,16 @@ class sendMail extends Command
      */
     public function handle()
     {
-        Mail::raw('バッチメール',function($message) {
-            $message->to('gouaxs@hotmail.co.jp')
-            ->subject('Laravelサービスから');
-        });
+        $users = User::all();
+        foreach($users as $user){ // ユーザーの数だけforeachで回す
+            $message = Message::where('user_id', $user->id)->first(); // idが最小のもの
+
+            // メール送信
+            Mail::raw($message->content, function($m) {
+                $m->to($user->email) // 宛先
+                ->subject('ひらめきメモ'); // タイトル
+            });
+        }
+
     }
 }
