@@ -12,18 +12,25 @@
 */
 
 
-// メッセージリスト
-Route::get('/messages', 'MessageController@index');
-Route::get('/message/new', 'MessageController@create');;
-Route::post('/message', 'MessageController@store');
-Route::get('/message/edit/{id}', 'MessageController@edit');;
-Route::post('/message/update/{id}', 'MessageController@update');
-
-
 // ルートディレクトリ → メッセージリスト
 Route::get('/', function () {
     return redirect('/messages');
 });
+
+
+// メッセージリスト
+Route::get('/messages', 'MessageController@index')->name('message.list');
+
+Route::get('/messages/new', 'MessageController@create')->name('message.new');
+Route::post('/message', 'MessageController@store')->name('message.store');
+
+Route::get('/message/edit/{id}', 'MessageController@edit')->name('message.edit');
+Route::post('/message/update/{id}', 'MessageController@update')->name('message.update');
+
+Route::get('/message/{id}', 'MessageController@show')->name('message.show');
+
+Route::delete('/message/{id}', 'MessageController@destroy')->name('message.delete');
+
 
 
 // ユーザー認証

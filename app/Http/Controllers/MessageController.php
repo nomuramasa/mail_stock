@@ -7,6 +7,13 @@ use Illuminate\Http\Request;
 
 class MessageController extends Controller
 {
+    // ログインしてない場合のアクセス制限
+    public function __construct()
+    {
+        $this->middleware('auth'); // ログインしてなければ弾く
+        // ->except(['index', 'show']);  // 除外するページ
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -36,30 +43,15 @@ class MessageController extends Controller
      */
     public function store(Request $request)
     {
-        // バリデーション
-        $validateData = $request->validate([
-            'name' => 'required|string|max:255',
-            'partner_name' => 'string|max:255',
-            'campaign_code' => 'max:255|unique:partners',
-            'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:6|confirmed',
-        ]);
+        // 新規追加
+        $article = new Message();
 
-        // ユーザー
-        $user = new User(); 
-        $user->name = $request->name;
-        $user->email = $request->email;
-        $user->password = bcrypt($request->password);
-        $user->save();
+        $user = \Auth::user();
 
-        // 代理店
-        $partner = new Partner(); 
-        $partner->name = $request->partner_name;
-        $partner->campaign_code = $request->campaign_code;
-        $partner->user_id = $user->id;
-        $partner->save();
-
-        return redirect()->route('partner.list');
+        $message->content = $request->content;
+        $message->user_id = $user->id;
+        $message->save();
+        return redirect()->route('article.show', ['id' => $article->id]);
     }
 
     /**

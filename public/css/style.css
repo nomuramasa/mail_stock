@@ -1,0 +1,13 @@
+
+/*水色ボタン*/
+.btn-light-blue{
+  color: #fff;
+  background-color: #27b7e2;
+  border-color: #27b7e2;
+}
+
+.btn-light-blue:hover {
+  color: #fff;
+  background-color: #288ead;
+  border-color: #288ead;
+}
