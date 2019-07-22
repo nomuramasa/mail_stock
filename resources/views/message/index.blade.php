@@ -33,19 +33,24 @@
 									</a>
 								</td>
 
+								{{-- 編集ボタン --}}
 								<td>
-									<a href={{ route('message.edit', ['id' => $message->id]) }} class='btn btn-light-blue btn-sm'><i class="fas fa-pen"></i></a>
+									<a href={{ route('message.edit', ['id' => $message->id]) }} class='btn btn-light-blue btn-sm balloon'>
+										<i class="fas fa-pen"></i>
+										<span>編集</span> {{-- 吹き出し --}}
+									</a>
 								</td>
 
+								{{-- 削除ボタンのフォーム --}}
 								<td>
-									{{-- 削除ボタンのフォーム --}}
 									<form method='POST' action='/message/{{ $message->id }}'> {{-- 消すID番号もリクエスト --}}
 										{{ csrf_field() }} {{-- CSRFトークン --}}
 										<input name='_method' type='hidden' value='DELETE'> {{-- DELETEメソッド --}}
 
 										{{-- 送信ボタン --}}
-										<button type='submit' class='btn btn-secondary btn-sm' onClick="delete_alert(event);return false;"> {{-- アラート --}}
+										<button type='submit' class='btn btn-secondary btn-sm balloon' onClick="delete_alert(event);return false;"> {{-- アラート --}}
 											<i class="fas fa-trash"></i> {{-- アイコン --}}
+											<span>削除</span> {{-- 吹き出し --}}
 										</button>
 									</form> 
 								</td>
