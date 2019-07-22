@@ -21,7 +21,8 @@ class MessageController extends Controller
      */
     public function index()
     {
-        $messages = Message::all();
+        $user = \Auth::user();
+        $messages = Message::all()->where('user_id', $user->id);
         return view('message.index', ['messages' => $messages]);
     }
 

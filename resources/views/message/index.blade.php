@@ -26,11 +26,13 @@
 								</td>
 								<td>
 
-								{{-- 削除ボタン --}}
+								{{-- 削除ボタンのフォーム --}}
 								<form method='POST' action='/message/{{ $message->id }}'> {{-- 消すID番号もリクエスト --}}
 									{{ csrf_field() }} {{-- CSRFトークン --}}
 									<input name='_method' type='hidden' value='DELETE'> {{-- DELETEメソッド --}}
-									<button type='submit' class='btn btn-secondary btn-sm'> {{-- 送信ボタン --}}
+
+									{{-- 送信ボタン --}}
+									<button type='submit' class='btn btn-secondary btn-sm' onClick="delete_alert(event);return false;"> {{-- アラート --}}
 										<i class="fas fa-trash"></i> {{-- アイコン --}}
 									</button>
 								</form> 

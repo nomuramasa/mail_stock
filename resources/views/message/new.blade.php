@@ -12,8 +12,6 @@
 	                    {{ csrf_field() }}
 
 	                    <div class="form-group row">
-	                        <label for="content" class="col-md-3 col-lg-2 col-form-label text-md-right">メッセージ</label>
-
 	                        <div class="col-md-8 col-lg-9">
 	                            <textarea id="content" type="text" class="form-control" name="content" rows="3" required autofocus></textarea>
 	                        </div>
