@@ -51,6 +51,7 @@ class MessageController extends Controller
         $message->content = $request->content;
         $message->user_id = $user->id;
         $message->save();
+
         return redirect()->route('message.list'); // リストに戻る
     }
 
@@ -71,10 +72,10 @@ class MessageController extends Controller
      * @param  \App\Message  $message
      * @return \Illuminate\Http\Response
      */
-    public function edit(Message $message)
+    public function edit(Message $message, $id)
     {
-        $partner = Partner::find($id);
-        return view('partner.edit', ['partner' => $partner]);
+        $message = Message::find($id);
+        return view('message.edit', ['message' => $message]);
     }
 
     /**
@@ -84,21 +85,12 @@ class MessageController extends Controller
      * @param  \App\Message  $message
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Message $message)
+    public function update(Request $request, Message $message, $id)
     {
-        // バリデーション
-        $validateData = $request->validate([
-            'name' => 'string|max:255',
-            'campaign_code' => 'max:255',
-        ]);
-
-        // 代理店
-        $partner = Partner::find($id); 
-        $partner->name = $request->name;
-        $partner->campaign_code = $request->campaign_code;
-        $partner->save();
-
-        return redirect()->route('partner.list');
+        $message = Message::find($id);
+        $message->content = $request->content;
+        $message->save();
+        return redirect()->route('message.list');
     }
 
     /**
