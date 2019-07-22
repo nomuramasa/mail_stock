@@ -25,10 +25,16 @@
 									<a href={{ route('message.edit', ['id' => $message->id]) }} class='btn btn-light-blue btn-sm'><i class="fas fa-pen"></i></a>
 								</td>
 								<td>
-	                {{ Form::open(['method' => 'delete', 'route' => ['message.delete', $message->id]]) }}
-	                    {{ Form::submit('削除') }}
-	                {{ Form::close() }}
-									{{-- <a href={{ route('message.delete', ['id' => $message->id]) }} class='btn btn-secondary btn-sm'><i class="fas fa-trash"></i></a> --}}
+
+								{{-- 削除ボタン --}}
+								<form method='POST' action='/message/{{ $message->id }}'> {{-- 消すID番号もリクエスト --}}
+									{{ csrf_field() }} {{-- CSRFトークン --}}
+									<input name='_method' type='hidden' value='DELETE'> {{-- DELETEメソッド --}}
+									<button type='submit' class='btn btn-secondary btn-sm'> {{-- 送信ボタン --}}
+										<i class="fas fa-trash"></i> {{-- アイコン --}}
+									</button>
+								</form> 
+
 								</td>
 							</tr>
 						@endforeach
