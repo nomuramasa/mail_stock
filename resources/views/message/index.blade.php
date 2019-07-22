@@ -17,7 +17,7 @@
 						@foreach($messages as $message)
 							<tr>
 								<td class="col-10 py-0">
-									<a class='partner-name py-3 d-block text-dark'>
+									<a class='py-3 d-block text-dark'>
 										{{ $message->content }}
 									</a>
 								</td>
@@ -25,7 +25,10 @@
 									<a href={{ route('message.edit', ['id' => $message->id]) }} class='btn btn-light-blue btn-sm'><i class="fas fa-pen"></i></a>
 								</td>
 								<td>
-									<a href='' class='btn btn-secondary btn-sm'><i class="fas fa-trash"></i></a>
+	                {{ Form::open(['method' => 'delete', 'route' => ['message.delete', $message->id]]) }}
+	                    {{ Form::submit('削除') }}
+	                {{ Form::close() }}
+									{{-- <a href={{ route('message.delete', ['id' => $message->id]) }} class='btn btn-secondary btn-sm'><i class="fas fa-trash"></i></a> --}}
 								</td>
 							</tr>
 						@endforeach

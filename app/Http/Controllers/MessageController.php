@@ -32,7 +32,7 @@ class MessageController extends Controller
      */
     public function create()
     {
-        return view('partner.new');
+        return view('message.new');
     }
 
     /**
@@ -44,14 +44,14 @@ class MessageController extends Controller
     public function store(Request $request)
     {
         // 新規追加
-        $article = new Message();
+        $message = new Message();
 
         $user = \Auth::user();
 
         $message->content = $request->content;
         $message->user_id = $user->id;
         $message->save();
-        return redirect()->route('article.show', ['id' => $article->id]);
+        return redirect()->route('message.list'); // リストに戻る
     }
 
     /**
@@ -109,6 +109,9 @@ class MessageController extends Controller
      */
     public function destroy(Message $message)
     {
-        //
+        $message = Message::find($id);
+        $message->delete();
+
+        return redirect('/messages');
     }
 }
