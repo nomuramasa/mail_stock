@@ -11,18 +11,17 @@
 	                <form class="form-horizontal" method="POST" action="{{ route('message.store') }}">
 	                    {{ csrf_field() }}
 
-	                    <div class="form-group row">
-	                        <div class="col-md-8 col-lg-9">
-	                            <textarea id="content" type="text" class="form-control" name="content" rows="3" required autofocus></textarea>
-	                        </div>
+	                    {{-- 入力欄 --}}
+	                    <div class="form-group">
+                        <textarea id="content" type="text" class="form-control" name="content" rows="8" required autofocus></textarea>
 	                    </div>
-                      <div class="form-group row mb-0">
-                          <div class="col-md-6 offset-md-3 col-lg-2 offset-lg-2">
-	                            <button type="submit" class="btn btn-light-blue">
-	                                登録
-	                            </button>
-	                        </div>
-	                    </div>
+
+                      <div class="text-center">
+                          <button type="submit" class="btn btn-light-blue">
+                              登録
+                          </button>
+                      </div>
+
 	                </form>
 	            </div>
 	        </div>
