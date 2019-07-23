@@ -42,13 +42,19 @@ class sendMail extends Command
     {
         $users = User::all();
         foreach($users as $user){ // ユーザーの数だけforeachで回す
-            $message = Message::where('user_id', $user->id)->first(); // idが最小のもの
+            $send_message = Message::where('user_id', $user->id)->first(); // idが最小のものを送る
 
             // メール送信
-            Mail::raw($message->content, function($m) {
-                $m->to($user->email) // 宛先
-                ->subject('ひらめきメモ'); // タイトル
-            });
+            Mail::raw(
+                $send_message->content, // 内容
+
+                function($m) use ($user) { 
+                    $m->to($user->email); // 宛先
+                    $m->subject('ひらめきメモ'); // タイトル
+                }
+            );
+
+            
         }
 
     }
