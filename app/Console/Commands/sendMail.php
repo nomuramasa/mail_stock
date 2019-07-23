@@ -42,11 +42,11 @@ class sendMail extends Command
     {
         $users = User::all();
         foreach($users as $user){ // ユーザーの数だけforeachで回す
-            $send_message = Message::where('user_id', $user->id)->first(); // idが最小のものを送る
+            $message = Message::where('user_id', $user->id)->first(); // idが最小のものを送る
 
             // メール送信
             Mail::raw(
-                $send_message->content, // 内容
+                $message->content, // 内容
 
                 function($m) use ($user) { 
                     $m->to($user->email); // 宛先
@@ -54,7 +54,13 @@ class sendMail extends Command
                 }
             );
 
-            
+            // 履歴に保存
+            $history = new History();
+
+            $history->content = $message->content; // 今送ったメッセージを保存
+            $history->user_id = $user->id; // ログイン中ユーザーのID
+            $history->save();
+
         }
 
     }
