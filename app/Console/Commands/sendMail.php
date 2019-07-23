@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Mail; // メールファサード
+use App\History; // 履歴モデル
 use App\Message; // メッセージモデル
 use App\User; // ユーザモデル
 
@@ -60,6 +61,9 @@ class sendMail extends Command
             $history->content = $message->content; // 今送ったメッセージを保存
             $history->user_id = $user->id; // ログイン中ユーザーのID
             $history->save();
+
+            // メッセージテーブルからは削除
+            $message->delete();   
 
         }
 
