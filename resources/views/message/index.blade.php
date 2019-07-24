@@ -12,6 +12,7 @@
 					      <th width='80px'>送信順</th> 
 					      <th>メッセージ</th> 
 					      <th width='50px'></th> 
+					      <th width='50px'></th> 
 					      <th width='50px'></th>  
 					  </tr>
 					</thead>
@@ -32,6 +33,15 @@
 										{{ $message->content }}
 									</a>
 								</td>
+
+								{{-- メールボタン --}}
+								<td>
+									<a href={{ route('message.edit', ['id' => $message->id]) }} class='btn btn-pink btn-sm balloon'>
+										<i class="fas fa-envelope"></i>
+										<span>メール</span> {{-- 吹き出し --}}
+									</a>
+								</td>
+
 
 								{{-- 編集ボタン --}}
 								<td>

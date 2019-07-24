@@ -12,6 +12,19 @@
   border-color: #288ead;
 }
 
+/*ピンクボタン*/
+.btn-pink{
+  color: #fff;
+  background-color: #ff8888;
+  border-color: #ff8888;
+}
+
+.btn-pink:hover {
+  color: #fff;
+  background-color: #ff4444;
+  border-color: #ff4444;
+}
+
 
 /*吹き出し*/
 .balloon {
@@ -47,4 +60,11 @@
     left: 50%;
     margin-left: -25px;
     z-index: 999;
+}
+
+
+body{ /*背景色*/
+height: 100vh;
+background: #349be5; 
+background: linear-gradient(to bottom, #349be5 0%, #bfe9fc 100%);
 }
