@@ -32,7 +32,9 @@ class MessageController extends Controller
                 $query->where('status', '=', 'set')
                       ->orWhere('status', '=', 'off');
             })
+
             ->where('user_id', '=', $user->id)
+            ->orderByRaw('CASE WHEN status = "set" THEN 0 ELSE 1 END ASC')
             ->get();
 
         return view('message.index', ['messages' => $messages]);
