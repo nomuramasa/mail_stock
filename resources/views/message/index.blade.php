@@ -4,7 +4,7 @@
   <div class="row justify-content-center">
     <div class="col-md-8">
       <div class="card p-4">
-				<h3 class='text-center mb-4'>メッセージタスク一覧</h3>
+				<h3 class='text-center mb-4'>ストック一覧</h3>
 
 				<table class='table table-hover'>
 					<thead>
@@ -36,11 +36,11 @@
 
 								{{-- メールボタン --}}
 								<td>
-									<a href={{ route('message.mail_switch', ['id' => $message->id]) }} 
+									<a href={{ route('message.switch', ['id' => $message->id]) }} 
 										class='
 										btn 
 										btn-sm balloon
-										@if($message->mail_status == 'set') 
+										@if($message->status == 'set') 
 											btn-pink 
 										@else
 											btn-light-gray
@@ -49,7 +49,7 @@
 										<i class="fas fa-envelope"></i>
 										{{-- 吹き出し --}}
 										<span>
-											@if($message->mail_status == 'set') 
+											@if($message->status == 'set') 
 												無効
 											@else
 												有効

@@ -22,7 +22,7 @@ class sendMail extends Command
      *
      * @var string
      */
-    protected $description = 'タスクメッセージをメールアドレスへ送信';
+    protected $description = 'ストックメッセージをメールアドレスへ送信';
 
     /**
      * Create a new command instance.
@@ -44,7 +44,7 @@ class sendMail extends Command
         $users = User::all();
         foreach($users as $user){ // ユーザーの数だけforeachで回す
             $message = Message::where('user_id', $user->id) // そのユーザーの持つメッセージ
-            ->where('mail_status', 'set') // セットされてるもの
+            ->where('status', 'set') // セットされてるもの
             ->first() // idが最小のものを送る
             ;
 
