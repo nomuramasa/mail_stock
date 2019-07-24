@@ -60,6 +60,7 @@ class sendMail extends Command
 
             // ステータスを送信済みにする
             $message->status ='done';
+            $message->save();
 
         }
 

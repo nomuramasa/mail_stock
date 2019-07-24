@@ -24,7 +24,9 @@
 							<tr>
 								<td class="py-0">
 									<a class='py-3 d-block text-dark'>
-									{{ $number }}
+									@if($message->status == 'set') 
+										{{ $number }}
+									@endif
 									</a>
 								</td>
 
@@ -82,7 +84,9 @@
 								</td>
 
 							</tr>
-						<?php $number++; ?>{{-- インデックス番号を追加 --}}
+							@if($message->status == 'set') 
+								<?php $number++; ?>{{-- インデックス番号を追加 --}}
+							@endif
 						@endforeach
 					</tbody>
 				</table>

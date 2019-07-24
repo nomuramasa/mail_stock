@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Message;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;  // クエリビルダを使う
 
 class MessageController extends Controller
 {
@@ -22,9 +23,17 @@ class MessageController extends Controller
     public function index()
     {
         $user = \Auth::user();
-        $messages = Message::all()
-        ->where('user_id', $user->id)
-        ;
+
+        // クエリビルダ
+        $messages = DB::table('messages')
+            ->where(function($query)
+            {
+                // メール未送信（ステータスがdone以外）のメッセージのみを表示
+                $query->where('status', '=', 'set')
+                      ->orWhere('status', '=', 'off');
+            })
+            ->where('user_id', '=', $user->id)
+            ->get();
 
         return view('message.index', ['messages' => $messages]);
     }
