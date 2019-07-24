@@ -27,7 +27,7 @@ Route::post('/message', 'MessageController@store')->name('message.store');
 Route::get('/message/edit/{id}', 'MessageController@edit')->name('message.edit');
 Route::post('/message/update/{id}', 'MessageController@update')->name('message.update');
 
-Route::get('/message/{id}', 'MessageController@show')->name('message.show');
+Route::get('/messages/mail_switch/{id}', 'MessageController@mail_switch')->name('message.mail_switch');
 
 Route::delete('/message/{id}', 'MessageController@destroy')->name('message.delete');
 

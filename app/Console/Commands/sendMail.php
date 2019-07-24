@@ -43,7 +43,10 @@ class sendMail extends Command
     {
         $users = User::all();
         foreach($users as $user){ // ユーザーの数だけforeachで回す
-            $message = Message::where('user_id', $user->id)->first(); // idが最小のものを送る
+            $message = Message::where('user_id', $user->id) // そのユーザーの持つメッセージ
+            ->where('mail_status', 'set') // セットされてるもの
+            ->first() // idが最小のものを送る
+            ;
 
             // メール送信
             Mail::raw(
@@ -55,15 +58,8 @@ class sendMail extends Command
                 }
             );
 
-            // 履歴に保存
-            $history = new History();
-
-            $history->content = $message->content; // 今送ったメッセージを保存
-            $history->user_id = $user->id; // ログイン中ユーザーのID
-            $history->save();
-
-            // メッセージテーブルからは削除
-            $message->delete();   
+            // ステータスを送信済みにする
+            $message->status ='done';
 
         }
 

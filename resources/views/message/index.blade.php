@@ -36,9 +36,25 @@
 
 								{{-- メールボタン --}}
 								<td>
-									<a href={{ route('message.edit', ['id' => $message->id]) }} class='btn btn-pink btn-sm balloon'>
+									<a href={{ route('message.mail_switch', ['id' => $message->id]) }} 
+										class='
+										btn 
+										btn-sm balloon
+										@if($message->mail_status == 'set') 
+											btn-pink 
+										@else
+											btn-light-gray
+										@endif
+										'>
 										<i class="fas fa-envelope"></i>
-										<span>メール</span> {{-- 吹き出し --}}
+										{{-- 吹き出し --}}
+										<span>
+											@if($message->mail_status == 'set') 
+												無効
+											@else
+												有効
+											@endif											
+										</span> 
 									</a>
 								</td>
 

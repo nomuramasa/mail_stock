@@ -22,7 +22,10 @@ class MessageController extends Controller
     public function index()
     {
         $user = \Auth::user();
-        $messages = Message::all()->where('user_id', $user->id);
+        $messages = Message::all()
+        ->where('user_id', $user->id)
+        ;
+
         return view('message.index', ['messages' => $messages]);
     }
 
@@ -51,10 +54,29 @@ class MessageController extends Controller
 
         $message->content = $request->content;
         $message->user_id = $user->id;
+        $message->mail_status = 'set';
         $message->save();
 
         return redirect()->route('message.list'); // リストに戻る
     }
+
+
+    // メールボタンを押したとき
+    public function mail_switch(Message $message, $id)
+    {
+        $message = Message::find($id); 
+
+        // セット・オフを切り替え
+        if($message->mail_status == 'off'){ // オフなら
+            $message->mail_status = 'set'; // セットに
+        }else{ // セットなら
+            $message->mail_status = 'off'; // オフに
+        }
+            $message->save(); //保存
+
+        return redirect()->route('message.list'); // リストに戻る
+    }
+
 
     /**
      * Display the specified resource.

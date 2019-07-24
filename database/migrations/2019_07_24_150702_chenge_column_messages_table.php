@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateHistoriesTable extends Migration
+class ChengeColumnMessagesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,8 @@ class CreateHistoriesTable extends Migration
      */
     public function up()
     {
-        Schema::create('histories', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->string('content');
-            $table->integer('user_id');            
-            $table->timestamps();
+        Schema::table('messages', function (Blueprint $table) {
+            $table->string('mail_status');
         });
     }
 
@@ -28,6 +25,8 @@ class CreateHistoriesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('histories');
+        Schema::table('messages', function (Blueprint $table) {
+            $table->dropColumn(['mail_status']);
+        });
     }
 }
