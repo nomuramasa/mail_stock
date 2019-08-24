@@ -22,7 +22,7 @@ class sendMail extends Command
      *
      * @var string
      */
-    protected $description = 'ストックメッセージをメールアドレスへ送信';
+    protected $description = 'ストックメールをアドレスへ送信';
 
     /**
      * Create a new command instance.
@@ -54,7 +54,7 @@ class sendMail extends Command
 
                 function($m) use ($user) { 
                     $m->to($user->email); // 宛先
-                    $m->subject('ひらめきメモ'); // タイトル
+                    $m->subject('メールストックから'); // タイトル
                 }
             );
 
